@@ -36,3 +36,18 @@
     transform: rotate(360deg);
   }
 }
+
+/* cover section */
+.main_section{
+  display: flex;
+  flex-direction: row;
+  width: 90vw;
+  align-items: center;
+  flex-wrap: wrap;
+  margin:auto;
+
+}
+
+.main_section>div{
+  width: 50%;
+}

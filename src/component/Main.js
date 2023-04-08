@@ -1,8 +1,10 @@
 import React from "react";
+import '../App.css';
+
 
 export default function Main() {
   return (
-    <>
+    <div className="main_section">
       <div>
         <h1>Welcome to the world of Tweets</h1>
         <h6>Tweets Sentiment Analysis</h6>
@@ -20,11 +22,12 @@ export default function Main() {
             <p>Minutes Since First Tweet Ever</p>
           </div>
         </div>
-      </div>
       <h2>Perform Sentiment Analysis on Tweets</h2>
+      </div>
       <div>
         {/* tweeter image  */}
+        Hello
       </div>
-    </>
+    </div>
   );
 }
