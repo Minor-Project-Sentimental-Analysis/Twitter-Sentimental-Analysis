@@ -12,7 +12,9 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
+.navbar{
+  padding-top: 35px;
+}
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -39,6 +41,7 @@
 
 /* cover section */
 .main_section{
+  padding-top: 30px;
   display: flex;
   flex-direction: row;
   width: 90vw;
@@ -47,7 +50,12 @@
   margin:auto;
 
 }
-
+.section{
+   display: flex;
+   flex-direction: row;
+   justify-content: space-evenly;
+   padding-top: 30px;
+}
 .main_section>div{
   width: 50%;
 }
