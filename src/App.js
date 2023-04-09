@@ -1,15 +1,12 @@
-import './App.css';
-import Navbar from './component/Navbar';
-import Main from './component/Main';
-import {
-  Route,
-  Link,
-} from "react-router-dom";
+import "./App.css";
+import Home from "./pages/Home";
+import Sentimental from "./pages/Sentimental";
+
 function App() {
   return (
     <>
-     <Navbar/>
-     <Main/>
+      {/* <Home /> */}
+      <Sentimental />
     </>
   );
 }
