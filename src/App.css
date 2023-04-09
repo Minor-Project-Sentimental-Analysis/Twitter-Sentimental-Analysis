@@ -1,60 +1,64 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-.navbar{
-  padding-top: 35px;
-}
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+*{
+  margin:0px;
+  padding:0px;
 }
 
 /* cover section */
 .main_section{
-  padding-top: 30px;
+  height: 100vh;
   display: flex;
   flex-direction: row;
   width: 90vw;
   align-items: center;
   flex-wrap: wrap;
   margin:auto;
-
+  justify-content: space-between;
+  
+}
+.main_section>div{
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.main_section>div>h1{
+  font-size: 2.5vw;
+  font-weight: bold;
+}
+.main_section>h6{
+  font-size: 1.25vw;
+}
+.main_section>h3{
+  font-size: 1.875vw;
+}
+.main_section>h2{
+  font-size: 1.67vw;
+}
+.Navbar{
+  width: 90vw;
+  margin:auto;
+  position: relative;
+  top: 10vh;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.navlink{
+  text-decoration: none;
+}
+.logo{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
 }
 .section{
-   display: flex;
-   flex-direction: row;
-   justify-content: space-evenly;
-   padding-top: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.section>div{
+  width: 10.4vw;
 }
 .main_section>div{
   width: 50%;

@@ -11,21 +11,21 @@ export default function Main() {
         <div className="section">
           <div>
             <h3>350632</h3>
-            <p>Tweets sent per minute</p>
+            <h6>Tweets sent per minute</h6>
           </div>
           <div>
             <h3>321056231</h3>
-            <p>Total Number of monthly active users on Twitter</p>
+            <h6>Total Number of monthly active users on Twitter</h6>
           </div>
           <div>
             <h3>7447680</h3>
-            <p>Minutes Since First Tweet Ever</p>
+            <h6>Minutes Since First Tweet Ever</h6>
           </div>
         </div>
         <br />
       <h2>Perform Sentiment Analysis on Tweets</h2>
       </div>
-      <div>
+      <div className="logo">
         <img src={twitterlogo} alt="" />
       </div>
     </div>
