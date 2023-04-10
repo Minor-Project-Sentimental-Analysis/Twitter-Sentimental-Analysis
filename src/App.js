@@ -5,7 +5,7 @@ import Sentimental from "./pages/Sentimental";
 function App() {
   return (
     <>
-      {/* <Home /> */}
+      <Home />
       <Sentimental />
     </>
   );
