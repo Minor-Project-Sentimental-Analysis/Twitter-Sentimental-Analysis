@@ -8,6 +8,8 @@ import twitterlogo from "../assets/twitter_logo.png";
 import negativelogo from "../assets/negative_logo.png";
 import neutrallogo from "../assets/neutral_logo.png";
 import positivelogo from "../assets/positive_logo.png";
+import CircularProgressBar from "../component/circularProgressBar";
+import {buildStyles} from 'react-circular-progressbar';
 export default function Sentimental() {
   return (
     <>
@@ -49,10 +51,17 @@ export default function Sentimental() {
         </div>
         <div className="logo">
           {/* <img src={twitterlogo} alt="" /> */}
-         {/* <Table/> */}
-         <div class="heading">
-</div>
-    <div class="outer-wrapper">
+          <div className="CPB1">
+          <CircularProgressBar cbcolor = {"blue"}/>
+          <CircularProgressBar cbcolor = {"red"}/>
+          <CircularProgressBar/>
+          </div>
+          <div className="CPB2">
+          <CircularProgressBar/>
+          <CircularProgressBar/>
+          </div>
+          
+    {/* <div class="outer-wrapper">
     <div class="table-wrapper">
     <table>
         <thead>
@@ -111,40 +120,10 @@ export default function Sentimental() {
                 <td>Value 2</td>
                 <td>Value 3</td>
             </tr>
-            <tr>
-                <td>Value 1</td>
-                <td>Value 2</td>
-                <td>Value 3</td>
-            </tr>
-            <tr>
-                <td>Value 1</td>
-                <td>Value 2</td>
-                <td>Value 3</td>
-            </tr>
-            <tr>
-                <td>Value 1</td>
-                <td>Value 2</td>
-                <td>Value 3</td>
-            </tr>
-            <tr>
-                <td>Value 1</td>
-                <td>Value 2</td>
-                <td>Value 3</td>
-            </tr>
-            <tr>
-                <td>Value 1</td>
-                <td>Value 2</td>
-                <td>Value 3</td>
-            </tr>
-            <tr>
-                <td>Value 1</td>
-                <td>Value 2</td>
-                <td>Value 3</td>
-            </tr>
         </tbody>
     </table>
 </div>
-</div>
+</div> */}
         </div>
       </div>
     </>

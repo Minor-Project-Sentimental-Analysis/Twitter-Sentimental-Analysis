@@ -193,3 +193,8 @@ table td {
   border: 1px solid rgb(177, 177, 177);
   padding-left: 20px;
 }
+
+.CPB1,.CPB2{
+  display: flex;
+  flex-direction: row;
+}
