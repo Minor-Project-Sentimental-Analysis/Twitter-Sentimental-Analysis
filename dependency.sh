@@ -10,3 +10,4 @@ pip install textblob
 pip install snscrape
 pip install flask-cors
 pip install pandas
+pip install numpy
