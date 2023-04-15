@@ -9,7 +9,6 @@ import negativelogo from "../assets/negative_logo.png";
 import neutrallogo from "../assets/neutral_logo.png";
 import positivelogo from "../assets/positive_logo.png";
 import CircularProgressBar from "../component/circularProgressBar";
-import {buildStyles} from 'react-circular-progressbar';
 export default function Sentimental() {
   return (
     <>
@@ -50,17 +49,16 @@ export default function Sentimental() {
       </div> */}
         </div>
         <div className="logo">
-          {/* <img src={twitterlogo} alt="" /> */}
-          <div className="CPB1">
-          <CircularProgressBar cbcolor = {"blue"}/>
-          <CircularProgressBar cbcolor = {"red"}/>
+          <img src={twitterlogo} alt="" />
+          {/* <div className="CPB1">
+          <CircularProgressBar />
+          <CircularProgressBar />
           <CircularProgressBar/>
           </div>
           <div className="CPB2">
           <CircularProgressBar/>
           <CircularProgressBar/>
-          </div>
-          
+          </div> */}
     {/* <div class="outer-wrapper">
     <div class="table-wrapper">
     <table>

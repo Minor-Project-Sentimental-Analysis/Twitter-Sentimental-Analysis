@@ -56,6 +56,9 @@ body {
   justify-content: space-between;
   align-items: center;
 }
+.Navbar>h6{
+  font-weight: bold;
+}
 .navlink {
   text-decoration: none;
   color: white;
@@ -197,4 +200,5 @@ table td {
 .CPB1,.CPB2{
   display: flex;
   flex-direction: row;
+  
 }

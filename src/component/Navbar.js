@@ -4,12 +4,12 @@ export default function Navbar() {
   return (
     <div className="Navbar">
       <div>
-        <a href="" className="navlink">
-          Home
+        <a href="/home" className="navlink">
+         Home
         </a>
       </div>
       <div>
-        <a href="" className="navlink">
+        <a href="/SentimentAnalysis" className="navlink">
           Sentiment Analysis
         </a>
       </div>
