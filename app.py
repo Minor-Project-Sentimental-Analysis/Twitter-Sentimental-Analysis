@@ -17,8 +17,6 @@ from keras_preprocessing.text import tokenizer_from_json
 import json
 import string
 import os
-from flask_cors import CORS
-
 
 import googletrans
 from langdetect import detect
@@ -56,7 +54,7 @@ def user_comment(user):
         print(f"An error occurred: {e}")
 
 
-with open('./models/tokenizer.json') as f:
+with open('./tokenizer.json') as f:
     data = json.load(f)
     tokenizer = tokenizer_from_json(data)
 
@@ -114,13 +112,15 @@ def lemmatizer_on_text(data):
     lemmatized_sentence = " ".join(lemmatized_words)
     return lemmatized_sentence;
 
-
-
 translator = Translator()
 
 def convert_to_english(text):
     try:
-        translation = translator.translate(text, src=detect(text), dest='en')
+        lang = translator.detect(text)
+        print(lang)
+        if lang.lang == 'en':
+            return text
+        translation = translator.translate(text, src=lang, dest='en')
         return translation.text
     except Exception as e:
         print(f"An error occurred: {e}")
@@ -261,7 +261,6 @@ model_names = [
 
 classes = ["Positive","Neutral","Negative"]
 app = Flask(__name__)
-CORS(app)
 
 # @app.route('/predict', methods=['POST'])
 # def prediction():
