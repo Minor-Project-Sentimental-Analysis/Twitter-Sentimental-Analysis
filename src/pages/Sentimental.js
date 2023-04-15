@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../component/Navbar";
 import { Route, Link } from "react-router-dom";
 import { BiSearchAlt, BiCloudDownload } from "react-icons/bi";
@@ -10,6 +10,8 @@ import neutrallogo from "../assets/neutral_logo.png";
 import positivelogo from "../assets/positive_logo.png";
 import CircularProgressBar from "../component/circularProgressBar";
 export default function Sentimental() {
+  const [visible,setVisible]=useState(false);
+  const [vis,setVis]=useState(true);
   return (
     <>
       <Navbar />
@@ -33,20 +35,23 @@ export default function Sentimental() {
             className="section"
             style={{ width: "90%", justifyContent: "space-around" }}
           >
-            <div className="option">
+            <div className="option" value='1' onClick={()=>setVisible(true) }>
               <BiCloudDownload className="option_icon" />
               <h5>Import Tweets</h5>
             </div>
-            <div className="option">
+            <div className="option" value='1' onClick={()=>setVisible(true) }>
               <FaRegKeyboard color="#0018F9" className="option_icon" />
               <h5>Type Text</h5>
             </div>
           </div>
-          {/* <h3>Enter the tweet to be analysed</h3>
+          { visible &&
+          <div>
+       <h3>Enter the tweet to be analysed</h3>
       <div className="inputBox">
         <input type="text" className="input_field"/>
         <BiSearchAlt className="search_icon"/>
-      </div> */}
+      </div>
+      </div>}
         </div>
         <div className="logo">
           <img src={twitterlogo} alt="" />
