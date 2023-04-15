@@ -17,6 +17,8 @@ from keras_preprocessing.text import tokenizer_from_json
 import json
 import string
 import os
+from flask_cors import CORS
+
 
 import googletrans
 from langdetect import detect
@@ -259,6 +261,7 @@ model_names = [
 
 classes = ["Positive","Neutral","Negative"]
 app = Flask(__name__)
+CORS(app)
 
 # @app.route('/predict', methods=['POST'])
 # def prediction():
