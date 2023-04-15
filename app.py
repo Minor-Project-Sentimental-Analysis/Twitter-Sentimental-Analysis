@@ -55,7 +55,7 @@ def user_comment(user):
         print(f"An error occurred: {e}")
 
 
-with open('../tokenizer.json') as f:
+with open('./tokenizer.json') as f:
     data = json.load(f)
     tokenizer = tokenizer_from_json(data)
 
