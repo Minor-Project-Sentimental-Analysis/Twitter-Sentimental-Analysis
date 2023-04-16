@@ -30,6 +30,7 @@ from werkzeug.utils import secure_filename
 
 import snscrape.modules.twitter as sntwitter
 import pandas as pd
+from flask_cors import CORS
 
 def user_comment(user):
     try:
@@ -262,6 +263,8 @@ model_names = [
 
 classes = ["Positive","Neutral","Negative"]
 app = Flask(__name__)
+CORS(app)
+
 
 # @app.route('/predict', methods=['POST'])
 # def prediction():
@@ -327,8 +330,8 @@ def prediction_all():
         'prediction': highest_prediction,
         'confidence': highest_confidence
     }
-
-    return jsonify({'results': results,'best-result':bestresults})
+    print(results)
+    return jsonify({'results': results,'bestresult':bestresults})
 
 def pred(text):
     text =convert_to_english(text)
@@ -367,7 +370,7 @@ def pred(text):
         'confidence': highest_confidence
     }
 
-    return {'results': results,'best-result':bestresults}
+    return {'results': results,'bestresult':bestresults}
 
 
 @app.route('/user_tweets', methods=['POST'])
@@ -382,7 +385,7 @@ def prediction_all_tweets():
         row = df.iloc[index]
 
         results_all.append((row['Tweet'],pred(row['Tweet'])))
-    return jsonify({'results-all': results_all})
+    return jsonify({'resultsall': results_all})
 
 app.config['UPLOAD_FOLDER'] = 'uploads'
 
