@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-export const userTweets = async (user) => {
-    await axios
+export const userTweets = (user) => {
+  return axios
     .post(
       "http://localhost:5000/user_tweets",
       {
@@ -22,6 +22,7 @@ export const userTweets = async (user) => {
     });
 };
 
+
 export const textTweets = async (text) => {
   await axios
     .post(
@@ -36,7 +37,7 @@ export const textTweets = async (text) => {
       }
     )
     .then((response) => {
-      console.log(response);
+      // console.log(response);
       return response;
     })
     .catch((error) => {

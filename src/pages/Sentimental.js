@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Navbar from "../component/Navbar";
 import { Route, Link, useNavigate } from "react-router-dom";
 import { BiSearchAlt, BiCloudDownload } from "react-icons/bi";
@@ -20,6 +20,7 @@ export default function Sentimental() {
   const [tableDisplay, settableDisplay] = useState("d-none");
   const [progressDisplay, setprogressDisplay] = useState("d-none");
   const [inputText, setInputText] = useState("");
+
   const [json, setJSON] = useState({
     "resultsall": [
       [
@@ -98,12 +99,13 @@ export default function Sentimental() {
       ]
     ]
   });
-
+  useEffect(() => {
+  }, [json]);
   const handleChange = ({ target }) => {
     let { value, name } = target;
     if (name === "inputText") setInputText(value);
   };
-
+// console.log(json);
   const handleSubmit = async () => {
     setinputDisplay("d-none");
     try {
@@ -115,8 +117,9 @@ export default function Sentimental() {
         settableDisplay("");
         response = await userTweets(inputText);
       }
+      console.log(response);
       if (response) {
-        setJSON(response.data);
+        setJSON(response.data); 
         console.log(json);
       }
     } catch (error) {
