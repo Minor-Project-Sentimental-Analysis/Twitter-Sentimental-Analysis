@@ -32,11 +32,11 @@ import snscrape.modules.twitter as sntwitter
 import pandas as pd
 from flask_cors import CORS
 
+limit = 10
 def user_comment(user):
     try:
         query = f"from:{user}"
         tweets = []
-        limit = 10
 
         #  Remove tweets.csv if it already exists
         # if os.path.exists("./temp/tweets.csv"):
@@ -119,7 +119,6 @@ translator = Translator()
 def convert_to_english(text):
     try:
         lang = translator.detect(text)
-        print(lang)
         if lang.lang == 'en':
             return text
         translation = translator.translate(text, src=lang, dest='en')
@@ -312,7 +311,7 @@ def prediction_all():
     for i in range(len(models)):
         model_name = model_names[i]
         model = models[i]
-        pred = model.predict(unseen_padded )[0]
+        pred = model.predict(unseen_padded)[0]
         
         result = {
             'model': model_name,
@@ -330,7 +329,9 @@ def prediction_all():
         'prediction': highest_prediction,
         'confidence': highest_confidence
     }
-    print(results)
+    for result in results:
+        if result == bestresults:
+            results.remove(result)
     return jsonify({'results': results,'bestresult':bestresults})
 
 def pred(text):
@@ -369,6 +370,10 @@ def pred(text):
         'prediction': highest_prediction,
         'confidence': highest_confidence
     }
+    for result in results:
+        if result == bestresults:
+            results.remove(result)
+
 
     return {'results': results,'bestresult':bestresults}
 
@@ -381,11 +386,28 @@ def prediction_all_tweets():
         return jsonify({'error': 'No user provided'})
     df=user_comment(user)
     results_all=[]
+
+    positive=0
+    negative=0
+    neutral=0
     for index in df.index:
         row = df.iloc[index]
 
         results_all.append((row['Tweet'],pred(row['Tweet'])))
-    return jsonify({'resultsall': results_all})
+        
+    for d in results_all:
+        if d[1]['bestresult']['prediction'] == 'Positive':
+            positive += 1
+        if d[1]['bestresult']['prediction'] == 'Negative':
+            negative += 1
+        if d[1]['bestresult']['prediction'] == 'Neutral':
+            neutral += 1
+    overall={
+        "positive": (positive/limit)*100,
+        "negative": (negative/limit)*100,
+        "neutral": (neutral/limit)*100
+    }
+    return jsonify({'overall':overall,'resultsall': results_all})
 
 app.config['UPLOAD_FOLDER'] = 'uploads'
 
