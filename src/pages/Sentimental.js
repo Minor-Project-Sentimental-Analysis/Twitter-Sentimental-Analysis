@@ -9,6 +9,7 @@ import negativelogo from "../assets/negative_logo.png";
 import neutrallogo from "../assets/neutral_logo.png";
 import positivelogo from "../assets/positive_logo.png";
 import CircularProgressBar from "../component/circularProgressBar";
+import Progresscard from "../component/Progresscard";
 import axios from "axios";
 
 import { textTweets, userTweets } from "../API/user";
@@ -158,14 +159,16 @@ export default function Sentimental() {
         </div>
         <div className="logo">
           {/* <img src={twitterlogo} alt="" /> */}
-          <div className={`${progressDisplay} CPB1`}>
-            <CircularProgressBar />1
+          <div className="CPB">
+            {/* <CircularProgressBar />
             <CircularProgressBar />
             <CircularProgressBar />
-          </div>
-          <div className={`${progressDisplay} CPB2`}>
             <CircularProgressBar />
-            <CircularProgressBar />
+            <CircularProgressBar /> */}
+            <Progresscard/>
+            {/* <Progresscard/>
+            <Progresscard/>
+            <Progresscard/> */}
           </div>
           <div class={`outer-wrapper ${tableDisplay}`}>
             <div class="table-wrapper">

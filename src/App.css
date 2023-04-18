@@ -197,9 +197,33 @@ table td {
   border: 1px solid rgb(177, 177, 177);
   padding-left: 20px;
 }
-
-.CPB1,.CPB2{
+.progress{
   display: flex;
   flex-direction: row;
-  
+  height: 13vh;
+  width: 20vw;
+  /* justify-content: space-around; */
+  margin: auto;
+  justify-content: space-evenly;
+  padding-top: 5%;
+  padding-right: 5%;
+  padding-bottom: 5%;
 }
+.progress>.lprogressbar>h3{
+  color: rgb(125, 20, 20);
+}
+.lprogressbar{
+  width: 60%;
+}
+.textbar{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 5%;
+}
+.progress>.lprogressbar>.textbar>h7{
+  color: rgb(125, 20, 20);
+}
+/* .baremoticon{
+  margin: 20%;
+} */
