@@ -59,43 +59,6 @@ export default function Sentimental() {
             }
           ]
         }
-      ],
-      [
-        "#60daysofdsa \nDay 8/60\nTheory day:\n- Introduction to stack data structures\n- Solved some time complexity problems",
-        {
-          "bestresult": {
-            "confidence": 99.95,
-            "model": "CNN Model",
-            "prediction": "Neutral"
-          },
-          "results": [
-            {
-              "confidence": 99.89,
-              "model": "SNN Model",
-              "prediction": "Neutral"
-            },
-            {
-              "confidence": 99.95,
-              "model": "CNN Model",
-              "prediction": "Neutral"
-            },
-            {
-              "confidence": 99.81,
-              "model": "LSTM Model",
-              "prediction": "Neutral"
-            },
-            {
-              "confidence": 99.86,
-              "model": "BILSTM Model",
-              "prediction": "Neutral"
-            },
-            {
-              "confidence": 99.86,
-              "model": "Hybrid Model",
-              "prediction": "Neutral"
-            }
-          ]
-        }
       ]
     ]
   });
