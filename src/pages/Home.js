@@ -14,7 +14,7 @@ export default function Home() {
       <div className="main_section">
       <div>
         <h1>Welcome to the world of Tweets</h1>
-        <h6>Tweets Sentiment Analysis</h6>
+        <h6 style={{ marginTop: "-40px",marginLeft:"9px" }}>Tweets Sentiment Analysis</h6>
         <div className="section">
           <div>
             <h3>350632</h3>
@@ -29,7 +29,6 @@ export default function Home() {
             <h6>Minutes Since First Tweet Ever</h6>
           </div>
         </div>
-        <br />
       <h2>Perform Sentiment Analysis on Tweets</h2>
       </div>
       <div className="logo">

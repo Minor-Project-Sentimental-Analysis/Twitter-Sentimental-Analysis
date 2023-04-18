@@ -24,7 +24,7 @@ export const userTweets = (user) => {
 
 
 export const textTweets = async (text) => {
-  await axios
+  return axios
     .post(
       "http://localhost:5000/predict_data",
       {
@@ -37,7 +37,7 @@ export const textTweets = async (text) => {
       }
     )
     .then((response) => {
-      // console.log(response);
+      console.log(response);
       return response;
     })
     .catch((error) => {

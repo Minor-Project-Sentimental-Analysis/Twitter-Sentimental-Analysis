@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../component/Navbar";
 import { Route, Link, useNavigate } from "react-router-dom";
 import { BiSearchAlt, BiCloudDownload } from "react-icons/bi";
@@ -8,11 +8,30 @@ import twitterlogo from "../assets/twitter_logo.png";
 import negativelogo from "../assets/negative_logo.png";
 import neutrallogo from "../assets/neutral_logo.png";
 import positivelogo from "../assets/positive_logo.png";
-import CircularProgressBar from "../component/circularProgressBar";
 import Progresscard from "../component/Progresscard";
+import {
+  CircularProgressbar,
+  CircularProgressbarWithChildren,
+  buildStyles,
+} from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
 import axios from "axios";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 
 import { textTweets, userTweets } from "../API/user";
+
+function emoticon(prediction) {
+  if (prediction === "Positive") {
+    return positivelogo;
+  }
+  if (prediction === "Neutral") {
+    return neutrallogo;
+  }
+  if (prediction === "Negative") {
+    return negativelogo;
+  }
+}
+
 export default function Sentimental() {
   const path = window.location.pathname;
   let navigate = useNavigate();
@@ -22,54 +41,13 @@ export default function Sentimental() {
   const [progressDisplay, setprogressDisplay] = useState("d-none");
   const [inputText, setInputText] = useState("");
 
-  const [json, setJSON] = useState({
-    "resultsall": [
-      [
-        "Taking a break from #60daysofdsa because of mid sems... Will continue soon...",
-        {
-          "bestresult": {
-            "confidence": 99.98,
-            "model": "CNN Model",
-            "prediction": "Neutral"
-          },
-          "results": [
-            {
-              "confidence": 99.8,
-              "model": "SNN Model",
-              "prediction": "Neutral"
-            },
-            {
-              "confidence": 99.98,
-              "model": "CNN Model",
-              "prediction": "Neutral"
-            },
-            {
-              "confidence": 99.81,
-              "model": "LSTM Model",
-              "prediction": "Neutral"
-            },
-            {
-              "confidence": 99.82,
-              "model": "BILSTM Model",
-              "prediction": "Neutral"
-            },
-            {
-              "confidence": 99.83,
-              "model": "Hybrid Model",
-              "prediction": "Neutral"
-            }
-          ]
-        }
-      ]
-    ]
-  });
-  useEffect(() => {
-  }, [json]);
+  const [json, setJSON] = useState({});
+  useEffect(() => {}, [json]);
   const handleChange = ({ target }) => {
     let { value, name } = target;
     if (name === "inputText") setInputText(value);
   };
-// console.log(json);
+  // console.log(json);
   const handleSubmit = async () => {
     setinputDisplay("d-none");
     try {
@@ -83,7 +61,7 @@ export default function Sentimental() {
       }
       console.log(response);
       if (response) {
-        setJSON(response.data); 
+        setJSON(response.data);
         console.log(json);
       }
     } catch (error) {
@@ -96,19 +74,106 @@ export default function Sentimental() {
       <div className="main_section">
         <div>
           <h1>Sentimental Analysis</h1>
-          <h6>Categorises tweet under Positive, Neutral and Negative</h6>
-          <div className="section" style={{ width: "90%" }}>
-            <div>
-              <img className="emoticon" src={positivelogo} alt="" />
+          {Object.keys(json).length === 0 && (
+            <h6 style={{ marginTop: "-40px", marginLeft: "9px" }}>
+              Categorises tweet under Positive, Neutral and Negative
+            </h6>
+          )}
+          {Object.keys(json).length === 0 && (
+            <div className="section" style={{ width: "90%" }}>
+              <div>
+                <img className="emoticon" src={positivelogo} alt="" />
+              </div>
+              <div>
+                <img className="emoticon" src={neutrallogo} alt="" />
+              </div>
+              <div>
+                <img className="emoticon" src={negativelogo} alt="" />
+              </div>
             </div>
-            <div>
-              <img className="emoticon" src={neutrallogo} alt="" />
+          )}
+          {json && json.bestresult && (
+            <div className="bestResult" style={{ width: "90%" }}>
+              <h4 style={{ color: "coral" }}>Statement</h4>
+              <p>{inputText}</p>
+              <Progresscard
+                width={40}
+                height={26}
+                imgw={100}
+                imgh={100}
+                name={json.bestresult.model}
+                percent={json.bestresult.confidence}
+                prediction={json.bestresult.prediction}
+              />
             </div>
-            <div>
-              <img className="emoticon" src={negativelogo} alt="" />
+          )}
+          {json && json.overall && (
+            <div className="overallResult" style={{ width: "90%" }}>
+              <h4 style={{ color: "coral" }}>Username</h4>
+              <p>@{inputText}</p>
+              <div className="section" style={{ width: "90%" }}>
+                <div>
+                  <CircularProgressbarWithChildren
+                    value={json.overall.positive}
+                    styles={buildStyles({
+                      textColor: "white",
+                      pathColor: "green",
+                      trailColor: "rgb(144,238,144)",
+                    })}
+                  >
+                    <img
+                      style={{ width: 50, marginTop: -5 }}
+                      src={positivelogo}
+                      alt="-ve"
+                    />
+                    <div style={{ fontSize: 20 }}>
+                      <strong>{json.overall.positive}%</strong>
+                    </div>
+                  </CircularProgressbarWithChildren>
+                </div>
+                <div>
+                  <CircularProgressbarWithChildren
+                    value={json.overall.neutral}
+                    styles={buildStyles({
+                      textColor: "white",
+                      pathColor: "yellow",
+                      trailColor: "rgb(189,183,107)",
+                    })}
+                  >
+                    <img
+                      style={{ width: 50, marginTop: -5 }}
+                      src={neutrallogo}
+                      alt="-ve"
+                    />
+                    <div style={{ fontSize: 20 }}>
+                      <strong>{json.overall.neutral}%</strong>
+                    </div>
+                  </CircularProgressbarWithChildren>
+                </div>
+                <div>
+                  <CircularProgressbarWithChildren
+                    value={json.overall.negative}
+                    // text={`${json.overall.negative}%`}
+                    styles={buildStyles({
+                      textColor: "white",
+                      pathColor: "rgb(255,0,0)",
+                      trailColor: "rgb(240,128,128)",
+                    })}
+                  >
+                    <img
+                      style={{ width: 50, marginTop: -5 }}
+                      src={negativelogo}
+                      alt="-ve"
+                    />
+                    <div style={{ fontSize: 20 }}>
+                      <strong>{json.overall.negative}%</strong>
+                    </div>
+                  </CircularProgressbarWithChildren>
+                </div>
+              </div>
             </div>
-          </div>
-          <br />
+          )}
+          {/* <br /> */}
           <div
             className={`section ${buttonDisplay}`}
             style={{ width: "90%", justifyContent: "space-around" }}
@@ -158,17 +223,30 @@ export default function Sentimental() {
           </div>
         </div>
         <div className="logo">
-          {/* <img src={twitterlogo} alt="" /> */}
-          <div className="CPB">
-            {/* <CircularProgressBar />
-            <CircularProgressBar />
-            <CircularProgressBar />
-            <CircularProgressBar />
-            <CircularProgressBar /> */}
-            <Progresscard/>
-            {/* <Progresscard/>
-            <Progresscard/>
-            <Progresscard/> */}
+          <img
+            className={
+              tableDisplay === "" || progressDisplay === "" ? "d-none" : ""
+            }
+            src={twitterlogo}
+            alt=""
+          />
+          <div className={`CPB ${progressDisplay}`}>
+            {json &&
+              json.results &&
+              json.results.map((item, i) => {
+                return (
+                  <Progresscard
+                    width={20}
+                    height={13}
+                    imgw={65}
+                    imgh={65}
+                    key={i}
+                    name={item.model}
+                    percent={item.confidence}
+                    prediction={item.prediction}
+                  />
+                );
+              })}
           </div>
           <div class={`outer-wrapper ${tableDisplay}`}>
             <div class="table-wrapper">
@@ -179,17 +257,59 @@ export default function Sentimental() {
                   <th>EMOTAG</th>
                 </thead>
                 <tbody>
-                  {json&&json.resultsall.map((item, i) => {
-                    return (
-                      <tr key ={i}>
-                        <td>
-                          {item[0]}
-                        </td>
-                        <td>{item[1].bestresult.prediction}</td>
-                        <td>Value 3</td>
-                      </tr>
-                    );
-                  })}
+                  {Object.keys(json).length === 0 && (
+                    <tr>
+                      <td style={{width:"500px"}}>Loading....</td>
+                      <td>Loading....</td>
+                      <td>Loading....</td>
+                    </tr>
+                  )}
+                  {Object.keys(json).length === 0 && (
+                    <tr>
+                      <td>Loading....</td>
+                      <td>Loading....</td>
+                      <td>Loading....</td>
+                    </tr>
+                  )}
+                  {Object.keys(json).length === 0 && (
+                    <tr>
+                      <td>Loading....</td>
+                      <td>Loading....</td>
+                      <td>Loading....</td>
+                    </tr>
+                  )}
+                  {Object.keys(json).length === 0 && (
+                    <tr>
+                      <td>Loading....</td>
+                      <td>Loading....</td>
+                      <td>Loading....</td>
+                    </tr>
+                  )}
+                  {Object.keys(json).length === 0 && (
+                    <tr>
+                      <td>Loading....</td>
+                      <td>Loading....</td>
+                      <td>Loading....</td>
+                    </tr>
+                  )}
+                  {json &&
+                    json.resultsall &&
+                    json.resultsall.map((item, i) => {
+                      return (
+                        <tr key={i}>
+                          <td>{item[0]}</td>
+                          <td>{item[1].bestresult.prediction}</td>
+                          <td>
+                            <img
+                              src={emoticon(item[1].bestresult.prediction)}
+                              alt=""
+                              height={40}
+                              width={40}
+                            />
+                          </td>
+                        </tr>
+                      );
+                    })}
                 </tbody>
               </table>
             </div>
