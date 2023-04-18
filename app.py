@@ -118,8 +118,8 @@ translator = Translator()
 
 def convert_to_english(text):
     try:
-        lang = translator.detect(text)
-        if lang.lang == 'en':
+        lang = translator.detect(text).lang
+        if lang == 'en':
             return text
         translation = translator.translate(text, src=lang, dest='en')
         return translation.text
@@ -239,6 +239,18 @@ def transform_abb(text):
     return text
 
   
+negating_words = ["no", "not", "never", "none", "neither", "nobody", "nowhere", "hardly", "scarcely", "barely", "didn't"]
+
+def has_negation(sentence):
+    # Tokenize sentence into words
+    words = sentence.split()
+    
+    # Check if any negating word exists in the sentence
+    for word in words:
+        if word in negating_words:
+            return True
+        
+    return False
 # Load the five pre-trained models and store them in a list
 models = [
     tf.keras.models.load_model('./models/snn_model.h5'),      # Index 0
@@ -291,6 +303,7 @@ CORS(app)
 def prediction_all():
     data = request.get_json()
     text = data.get('text', None)
+    check=has_negation(text)
     if text is None:
         return jsonify({'error': 'No text provided'})
     
@@ -318,6 +331,10 @@ def prediction_all():
             'prediction': classes[np.argmax(pred)],
             'confidence': int(max(pred) * 10000) / 100 
         }
+        if check == True:
+            if result['prediction'] == 'Positive':
+                result['prediction'] = 'Negative'
+
         results.append(result)
 
     sorted_results = sorted(results, key=lambda x: x["confidence"], reverse=True)
@@ -329,12 +346,16 @@ def prediction_all():
         'prediction': highest_prediction,
         'confidence': highest_confidence
     }
+    if(check==True):
+        if(bestresults['prediction']=='Positive'):
+            bestresults['prediction']='Negative'
     for result in results:
         if result == bestresults:
             results.remove(result)
     return jsonify({'results': results,'bestresult':bestresults})
 
 def pred(text):
+    check=has_negation(text)
     text =convert_to_english(text)
     text =spell_check(text)
     text = cleaning(text)
@@ -359,6 +380,9 @@ def pred(text):
             'prediction': classes[np.argmax(pred)],
             'confidence': int(max(pred) * 10000) / 100 
         }
+        if(check==True):
+            if(result['prediction']=='Positive'):
+                result['prediction']='Negative'
         results.append(result)
 
     sorted_results = sorted(results, key=lambda x: x["confidence"], reverse=True)
@@ -370,6 +394,9 @@ def pred(text):
         'prediction': highest_prediction,
         'confidence': highest_confidence
     }
+    if(check==True):
+        if(bestresults['prediction']=='Positive'):
+            bestresults['prediction']='Negative'
     for result in results:
         if result == bestresults:
             results.remove(result)
