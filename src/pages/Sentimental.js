@@ -231,6 +231,50 @@ export default function Sentimental() {
             alt=""
           />
           <div className={`CPB ${progressDisplay}`}>
+            {Object.keys(json).length === 0 && (
+              <Progresscard
+                width={20}
+                height={13}
+                imgw={65}
+                imgh={65}
+                name={"SNN"}
+                percent={0}
+                prediction={"-:-"}
+              />
+            )}
+            {Object.keys(json).length === 0 && (
+              <Progresscard
+                width={20}
+                height={13}
+                imgw={65}
+                imgh={65}
+                name={"CNN"}
+                percent={0}
+                prediction={"-:-"}
+              />
+            )}
+            {Object.keys(json).length === 0 && (
+              <Progresscard
+                width={20}
+                height={13}
+                imgw={65}
+                imgh={65}
+                name={"LSTM"}
+                percent={0}
+                prediction={"-:-"}
+              />
+            )}
+            {Object.keys(json).length === 0 && (
+              <Progresscard
+                width={20}
+                height={13}
+                imgw={65}
+                imgh={65}
+                name={"BiLSTM"}
+                percent={0}
+                prediction={"-:-"}
+              />
+            )}
             {json &&
               json.results &&
               json.results.map((item, i) => {
@@ -259,7 +303,7 @@ export default function Sentimental() {
                 <tbody>
                   {Object.keys(json).length === 0 && (
                     <tr>
-                      <td style={{width:"500px"}}>Loading....</td>
+                      <td style={{ width: "500px" }}>Loading....</td>
                       <td>Loading....</td>
                       <td>Loading....</td>
                     </tr>
