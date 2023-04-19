@@ -25,6 +25,10 @@ Open bash terminal and type command
 ```sh
 bash ./dependency.sh
 ```
+## Screenshot
+![bla](https://raw.githubusercontent.com/Minor-Project-Sentimental-Analysis/Twitter-Sentimental-Analysis/main/src/images/f82988dd-8468-4d12-8263-ead1c5a3769c.jpeg)
+---
+![home_page](https://raw.githubusercontent.com/Minor-Project-Sentimental-Analysis/Twitter-Sentimental-Analysis/main/src/images/04157f8c-d4a4-4ce0-89b3-fa80fca5e701.jpeg)
 
 ### Installation
 
